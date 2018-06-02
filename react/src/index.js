@@ -7,9 +7,11 @@ import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
 import './index.css';
 import App from './App';
 import itemsReducer from './reducers/itemsReducer';
+import singleItem from './reducers/singleItemReducer';
 
 const rootReducer = combineReducers({
     items: itemsReducer,
+    item: singleItem,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
