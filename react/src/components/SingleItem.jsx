@@ -16,6 +16,17 @@ class SingleItem extends Component {
 
     componentDidMount() {
         axios.get(`/item/${this.props.match.params.id}`).then((response) => {
+            if (response.data.price === null) {
+                return this.setState({
+                    price: 'Price Upon Request',
+                    company: response.data.seller.company,
+                    title: response.data.title,
+                    measurements: response.data.measurements.display,
+                    description: response.data.description,
+                    creators: response.data.creators,
+                    img: response.data.image,
+                })
+            }
             this.setState({
                 company: response.data.seller.company,
                 title: response.data.title,
