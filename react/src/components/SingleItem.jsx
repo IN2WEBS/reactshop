@@ -11,38 +11,33 @@ class SingleItem extends Component {
         measurements: '',
         description: '',
         creators: '',
-        img: '',
+        image: '',
     };
 
     componentDidMount() {
         axios.get(`/item/${this.props.match.params.id}`).then((response) => {
-            if (response.data.price === null) {
+            const {title, description, creators, image, price} = response.data;
+
+            if (price === null) {
                 return this.setState({
+                    title, description, creators, image,
                     price: 'Price Upon Request',
                     company: response.data.seller.company,
-                    title: response.data.title,
                     measurements: response.data.measurements.display,
-                    description: response.data.description,
-                    creators: response.data.creators,
-                    img: response.data.image,
                 })
             }
             this.setState({
-                company: response.data.seller.company,
-                title: response.data.title,
+                title, description, creators, image,
                 price: response.data.price.amounts.USD,
+                company: response.data.seller.company,
                 measurements: response.data.measurements.display,
-                description: response.data.description,
-                creators: response.data.creators,
-                img: response.data.image,
             })
         })
     }
 
     render() {
-        console.log(this.state);
         return (
-            <div className="homepage">
+            <div className="single-item-page">
                 <Link to="/">
                     <button>Home</button>
                 </Link>
