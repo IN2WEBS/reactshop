@@ -8,6 +8,7 @@ import './index.css';
 import App from './App';
 import itemsReducer from './reducers/itemsReducer';
 import singleItem from './reducers/singleItemReducer';
+import 'typeface-roboto';
 
 const rootReducer = combineReducers({
     items: itemsReducer,

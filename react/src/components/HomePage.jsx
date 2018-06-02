@@ -7,7 +7,7 @@ import * as actions from '../actions/singleItemAction';
 class HomePage extends Component {
 
     state = {
-        loadItems: 3,
+        loadItems: 6,
     };
 
     loadMoreItems = () => {
@@ -20,7 +20,7 @@ class HomePage extends Component {
         const allItems = this.props.shopItems && this.props.shopItems.slice(0, `${this.state.loadItems}`).map((item, i) => {
                 const price = item.price && item.price.amounts.USD;
                 return (
-                    <div key={i} onClick={() => this.props.readItem(item)}>
+                    <div key={i} onClick={() => this.props.readItem(item)} className="shop-item">
                         <Link to={`/item/${item.id}`}>
                             <img src={item.image} alt=""/>
                             <p>{price}</p>
@@ -32,9 +32,13 @@ class HomePage extends Component {
 
         return (
             <div className="homepage">
-                {allItems}
-                {allItems.length < this.props.shopItems.length &&
-                <button onClick={this.loadMoreItems}>Load more</button>}
+                <header>Browse page</header>
+                <div className="items-container">{allItems}
+                    {allItems.length < this.props.shopItems.length &&
+                    <div className="button-container">
+                        <button onClick={this.loadMoreItems}>Load more</button>
+                    </div>}
+                </div>
             </div>
         );
     }
