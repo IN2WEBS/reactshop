@@ -5,11 +5,19 @@ import {connect} from 'react-redux';
 
 class HomePage extends Component {
 
+    state = {
+        loadItems: 3,
+    };
+
+    loadMoreItems = () => {
+        this.setState({
+            loadItems: this.state.loadItems + 3
+        })
+    };
+
     render() {
-        console.log('this.props.shopItems', this.props.shopItems);
-        const allItems = this.props.shopItems && this.props.shopItems.map((item, i) => {
-            const price = item.price && item.price.amounts.USD;
-            console.log('price',price);
+        const allItems = this.props.shopItems && this.props.shopItems.slice(0, `${this.state.loadItems}`).map((item, i) => {
+                const price = item.price && item.price.amounts.USD;
                 return (
                     <div key={i}>
                         <img src={item.image} alt=""/>
@@ -18,9 +26,12 @@ class HomePage extends Component {
                 );
             }
         );
+
         return (
             <div className="homepage">
                 {allItems}
+                {allItems.length < this.props.shopItems.length &&
+                <button onClick={this.loadMoreItems}>Load more</button>}
             </div>
         );
     }
