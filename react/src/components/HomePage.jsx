@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import * as actions from '../actions/singleItemAction';
 
 
 class HomePage extends Component {
@@ -19,9 +20,11 @@ class HomePage extends Component {
         const allItems = this.props.shopItems && this.props.shopItems.slice(0, `${this.state.loadItems}`).map((item, i) => {
                 const price = item.price && item.price.amounts.USD;
                 return (
-                    <div key={i}>
-                        <img src={item.image} alt=""/>
-                        <p>{price}</p>
+                    <div key={i} onClick={() => this.props.readItem(item)}>
+                        <Link to={`/item/${item.id}`}>
+                            <img src={item.image} alt=""/>
+                            <p>{price}</p>
+                        </Link>
                     </div>
                 );
             }
@@ -43,4 +46,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(mapStateToProps, actions)(HomePage)
