@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import IconBack from '../assets/gobackarrow.svg';
+import IconFavorite from '../assets/favorite.svg';
+import IconFavoriteSelected from '../assets/favoriteselected.svg';
 
 class SingleItem extends Component {
 
@@ -13,6 +15,7 @@ class SingleItem extends Component {
         description: '',
         creators: '',
         image: '',
+        favorite: false,
     };
 
     componentDidMount() {
@@ -45,6 +48,9 @@ class SingleItem extends Component {
                     {company}
                 </header>
                 <div className="single-item-image">
+                    {this.state.favorite ?
+                        <span onClick={() =>this.setState({favorite: !this.state.favorite})}><img src={IconFavoriteSelected} alt="favorite"/></span> :
+                        <span onClick={() =>this.setState({favorite: !this.state.favorite})}><img src={IconFavorite} alt="favorite"/></span>}
                     <img src={image} alt="no image"/>
                 </div>
                 <div className="item-info-container">

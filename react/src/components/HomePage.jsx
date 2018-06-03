@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions/singleItemAction';
+import IconFavorite from '../assets/favorite.svg';
 
 
 class HomePage extends Component {
@@ -23,8 +24,11 @@ class HomePage extends Component {
                     <div key={i} onClick={() => this.props.readItem(item)} className="shop-item">
                         <Link to={`/item/${item.id}`}>
                             <img src={item.image} alt=""/>
-                            <p>{price}</p>
                         </Link>
+                        <div className="browse-item-info">
+                            <span>{price}</span>
+                            <span><img src={IconFavorite} alt="favorite"/></span>
+                        </div>
                     </div>
                 );
             }
