@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../actions/singleItemAction';
 import IconFavorite from '../assets/favorite.svg';
 import IconFavoriteSelected from '../assets/favoriteselected.svg';
-
+import Header from './header';
 
 class HomePage extends Component {
 
@@ -26,7 +26,7 @@ class HomePage extends Component {
                         <Link to={`/item/${item.id}`}>
                             <img src={item.image} alt=""/>
                         </Link>
-                        <div className="browse-item-info">
+                        <div className="shop-item-info">
                             <span>{price}</span>
                             <span onClick={() => this.props.favoriteItem(item.id)}>
                                 {item.on_hold ?
@@ -40,12 +40,12 @@ class HomePage extends Component {
         );
 
         return (
-            <div className="homepage">
-                <header>Browse page</header>
-                <div className="items-container">{allItems}
+            <div>
+                <Header headerTitle={'Browse Page'} showHomeLink={false}/>
+                <div className="homepage-container">{allItems}
                     {allItems.length < this.props.shopItems.length &&
                     <div className="button-container">
-                        <button onClick={this.loadMoreItems}>Load more</button>
+                        <button className="btn" onClick={this.loadMoreItems}>Load more</button>
                     </div>}
                 </div>
             </div>

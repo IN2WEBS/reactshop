@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-import IconBack from '../assets/gobackarrow.svg';
 import IconFavorite from '../assets/favorite.svg';
 import IconFavoriteSelected from '../assets/favoriteselected.svg';
+import Header from "./header";
 
 class SingleItem extends Component {
 
@@ -43,10 +42,7 @@ class SingleItem extends Component {
         const {title, description, creators, image, price, company, measurements, on_hold} = this.state;
         return (
             <div className="single-item-page">
-                <header className="single-item-header">
-                    <Link to="/"><img src={IconBack} alt=""/>Home</Link>
-                    {company}
-                </header>
+                <Header headerTitle={company} showHomeLink={true}/>
                 <div className="single-item-image">
                     <span>{on_hold ?
                         <img src={IconFavoriteSelected} alt="favorite"/> :
@@ -55,16 +51,16 @@ class SingleItem extends Component {
                     <img src={image} alt="no image"/>
                 </div>
                 <div className="item-info-container">
-                    <div className="info-section-1">
+                    <div className="info-section top">
                         <p className="item-title">{title}</p>
                         <p>{price}</p>
                         <p>Measurements: {measurements}</p>
-                        <div className="info-section-1-action-buttons">
+                        <div className="info-section-action-buttons">
                             <span>PURCHASE</span>
                             <span>MAKE OFFER</span>
                         </div>
                     </div>
-                    <div className="info-section-2">
+                    <div className="info-section bottom">
                         <p>{description}</p>
                         <p>Creator: {creators}</p>
                     </div>
