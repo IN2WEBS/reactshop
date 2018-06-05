@@ -15,23 +15,23 @@ class SingleItem extends Component {
         description: '',
         creators: '',
         image: '',
-        favorite: false,
+        on_hold: '',
     };
 
     componentDidMount() {
         axios.get(`/item/${this.props.match.params.id}`).then((response) => {
-            const {title, description, creators, image, price} = response.data;
+            const {title, description, creators, image, price, on_hold} = response.data;
 
             if (price === null) {
                 return this.setState({
-                    title, description, creators, image,
+                    title, description, creators, image, on_hold,
                     price: 'Price Upon Request',
                     company: response.data.seller.company,
                     measurements: response.data.measurements.display,
                 })
             }
             this.setState({
-                title, description, creators, image,
+                title, description, creators, image, on_hold,
                 price: response.data.price.amounts.USD,
                 company: response.data.seller.company,
                 measurements: response.data.measurements.display,
@@ -40,7 +40,7 @@ class SingleItem extends Component {
     }
 
     render() {
-        const {title, description, creators, image, price, company, measurements} = this.state;
+        const {title, description, creators, image, price, company, measurements, on_hold} = this.state;
         return (
             <div className="single-item-page">
                 <header className="single-item-header">
@@ -48,9 +48,10 @@ class SingleItem extends Component {
                     {company}
                 </header>
                 <div className="single-item-image">
-                    {this.state.favorite ?
-                        <span onClick={() =>this.setState({favorite: !this.state.favorite})}><img src={IconFavoriteSelected} alt="favorite"/></span> :
-                        <span onClick={() =>this.setState({favorite: !this.state.favorite})}><img src={IconFavorite} alt="favorite"/></span>}
+                    <span>{on_hold ?
+                        <img src={IconFavoriteSelected} alt="favorite"/> :
+                        <img src={IconFavorite} alt="favorite"/>}
+                    </span>
                     <img src={image} alt="no image"/>
                 </div>
                 <div className="item-info-container">

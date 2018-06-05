@@ -8,5 +8,3 @@ const singleItem = (state = [], action) => {
 };
 
 export default singleItem;
-
-
