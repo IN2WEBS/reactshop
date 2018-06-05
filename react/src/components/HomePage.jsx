@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions/singleItemAction';
 import IconFavorite from '../assets/favorite.svg';
+import IconFavoriteSelected from '../assets/favoriteselected.svg';
 
 
 class HomePage extends Component {
@@ -27,7 +28,11 @@ class HomePage extends Component {
                         </Link>
                         <div className="browse-item-info">
                             <span>{price}</span>
-                            <span><img src={IconFavorite} alt="favorite"/></span>
+                            <span onClick={() => this.props.favoriteItem(item.id)}>
+                                {item.on_hold ?
+                                    <img src={IconFavoriteSelected} alt="favorite"/> :
+                                    <img src={IconFavorite} alt="favorite"/>}
+                            </span>
                         </div>
                     </div>
                 );
